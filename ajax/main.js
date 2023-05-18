@@ -1,6 +1,8 @@
 async function getCurrentWeather() {
+  let cityTag = document.querySelector("#cityid");
+
   let appid = "7023923dd26a725da995c75b65864de5";
-  let city = "mumbai";
+  let city = cityTag.value || "mumbai";
   let url = `https://api.openweathermap.org/data/2.5/weather?appid=${appid}&units=metric&q=${city}`;
 
   // Request :: Response
