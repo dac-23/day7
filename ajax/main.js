@@ -6,12 +6,8 @@ async function getCurrentWeather() {
   let url = `https://api.openweathermap.org/data/2.5/weather?appid=${appid}&units=metric&q=${city}`;
 
   // Request :: Response
-  let xhr = new XMLHttpRequest();
-
-  xhr.onload = () => {
-    let jsonStr = xhr.response;
-    let data = JSON.parse(jsonStr);
-
+  let jqXhr = jQuery.get(url);
+  jqXhr.done((data) => {
     // DOM OPERATION :: DISPLAY THE DATA TO THE END USER
     let lon = data.coord.lon;
     let lat = data.coord.lat;
@@ -21,18 +17,13 @@ async function getCurrentWeather() {
 
     let parentTag = document.querySelector("#parent");
     let newValue = `
-                    <div class="fs-1">XHR CITY : ${city}</div>
-                    <div class="fs-3">
-                        Current Temp : <span class="badge bg-primary">${currentTemp}</span>
-                    </div>
-                    <div class="fs-4">Lon : ${lon} And Lat: ${lat}</div>
-                    <div class="fs-4">Max : ${maxTemp} And Min: ${minTemp}</div>
-                `;
+                <div class="fs-1">JQXHR CITY : ${city}</div>
+                <div class="fs-3">
+                    Current Temp : <span class="badge bg-primary">${currentTemp}</span>
+                </div>
+                <div class="fs-4">Lon : ${lon} And Lat: ${lat}</div>
+                <div class="fs-4">Max : ${maxTemp} And Min: ${minTemp}</div>
+            `;
     parentTag.innerHTML = newValue;
-  };
-
-  xhr.open("GET", url);
-  xhr.send();
-
-  console.log(data);
+  });
 }
