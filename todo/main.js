@@ -15,7 +15,7 @@ async function getAllTodo() {
   for (let item of data) {
     let parent = document.querySelector("#parent");
     let existingElement = parent.innerHTML;
-    let newElement = `<h1>${item.message}</h1>`;
+    let newElement = `<div class="bg-secondary-subtle p-2 rounded fs-6 mb-1">${item.message}</div>`;
 
     parent.innerHTML = newElement + existingElement;
   }
