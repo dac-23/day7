@@ -1,3 +1,10 @@
+// HOOK :: this helps to call the function;
+// while page is getting loaded.
+window.addEventListener("load", () => {
+  console.log("CALLED WHILE LOAD");
+  getAllTodo();
+});
+
 async function getAllTodo() {
   let url = `http://localhost:4000/`;
   let res = await fetch(url);
