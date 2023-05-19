@@ -4,11 +4,22 @@ async function getAllTodo() {
   let data = await res.json();
 
   console.log(data);
+  // DOM OPR
+  for (let item of data) {
+    let parent = document.querySelector("#parent");
+    let existingElement = parent.innerHTML;
+    let newElement = `<h1>${item.message}</h1>`;
+
+    parent.innerHTML = newElement + existingElement;
+  }
 }
 
 async function addTodo() {
+  let inputTodoTag = document.querySelector("#todoid");
+  let todoValue = inputTodoTag.value || "hardcoded";
+
   let url = `http://localhost:4000/addtodo`;
-  let data = { message: "Hardcoded" };
+  let data = { message: todoValue };
 
   await fetch(url, {
     method: "POST",
@@ -17,4 +28,10 @@ async function addTodo() {
       "Content-Type": "application/json",
     },
   });
+
+  // clear the box
+  inputTodoTag.value = "";
+
+  // refresh
+  getAllTodo();
 }
