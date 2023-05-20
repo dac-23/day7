@@ -1,11 +1,16 @@
 async function createUser() {
   let url = "http://localhost:4000/user/";
 
+  let usernameTag = document.querySelector("#user_id");
+  let passwordTag = document.querySelector("#password_id");
+  let emailTag = document.querySelector("#email_id");
+  let mobileTag = document.querySelector("#mobile_id");
+
   let data = {
-    username: "mumbai",
-    password: "12345",
-    email: "mi@adsf.ocm",
-    mobile: "212121",
+    username: usernameTag.value,
+    password: passwordTag.value,
+    email: emailTag.value,
+    mobile: mobileTag.value,
   };
 
   await fetch(url, {
@@ -15,4 +20,10 @@ async function createUser() {
       "Content-Type": "application/json",
     },
   });
+
+  usernameTag.value = "";
+  passwordTag.value = "";
+  emailTag.value = "";
+  mobileTag.value = "";
+  alert("User Added");
 }
